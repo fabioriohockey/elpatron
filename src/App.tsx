@@ -7,6 +7,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { CartProvider } from "@/contexts/CartContext";
 import Index from "./pages/Index";
 import Catalogo from "./pages/Catalogo";
+import Produto from "./pages/Produto";
 import Quiz from "./pages/Quiz";
 import Favoritos from "./pages/Favoritos";
 import Carrinho from "./pages/Carrinho";
@@ -27,6 +28,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/catalogo" element={<Catalogo />} />
+              <Route path="/produto/:id" element={<Produto />} />
               <Route path="/quiz" element={<Quiz />} />
               <Route path="/favoritos" element={<Favoritos />} />
               <Route path="/carrinho" element={<Carrinho />} />

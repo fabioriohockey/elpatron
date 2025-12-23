@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart, ShoppingBag, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Product } from '@/contexts/CartContext';
 import { useCart } from '@/contexts/CartContext';
 import { Button } from '@/components/ui/button';
@@ -61,36 +62,34 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </button>
 
       {/* Image */}
-      <div className="relative aspect-square bg-secondary overflow-hidden">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-        
-        {/* Quick Add Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileHover={{ opacity: 1 }}
-          className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
+      <Link to={`/produto/${product.id}`} className="block">
+        <div className="relative aspect-square bg-secondary overflow-hidden cursor-pointer">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+        </div>
+      </Link>
+      
+      {/* Quick Add Button */}
+      <div className="absolute bottom-[140px] left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+        <Button
+          onClick={handleAddToCart}
+          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold"
         >
-          <Button
-            onClick={handleAddToCart}
-            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold"
-          >
-            <ShoppingBag className="h-4 w-4 mr-2" />
-            Adicionar
-          </Button>
-        </motion.div>
+          <ShoppingBag className="h-4 w-4 mr-2" />
+          Adicionar
+        </Button>
       </div>
 
       {/* Content */}
-      <div className="p-4">
+      <Link to={`/produto/${product.id}`} className="block p-4">
         <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
           {product.brand}
         </p>
-        <h3 className="font-display text-lg font-semibold text-foreground mb-2 line-clamp-1">
+        <h3 className="font-display text-lg font-semibold text-foreground mb-2 line-clamp-1 hover:text-primary transition-colors">
           {product.name}
         </h3>
         
@@ -112,7 +111,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </span>
           )}
         </div>
-      </div>
+      </Link>
     </motion.div>
   );
 };
